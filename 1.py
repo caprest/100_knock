@@ -41,19 +41,34 @@ a4_ans = dict(a4_list)
 print("04: "+str(a4_ans))
 
 #05
-def ngram(string,n):
-    words = [(string[i:i+n],i) for i in range(len(string)-n+1) ]
-    ngram_dict ={}
-    for word in words:
-        if word[0] in ngram_dict:
-            ngram_dict[word[0]].append(word[1])
-        else:
-            ngram_dict[word[0]] = [word[1]]
+def ngram(string,n,mode="c"):
+    if mode =="c":
+        words = [(string[i:i+n],i) for i in range(len(string)-n+1) ]
+        ngram_dict ={}
+        for word in words:
+            if word[0] in ngram_dict:
+                ngram_dict[word[0]].append(word[1])
+            else:
+                ngram_dict[word[0]] = [word[1]]
+
+    elif mode == "w":
+        words = string.split(" ")
+        dict_words = [(" ".join(words[i:i+n]),i) for i in range(len(words)-n+1)]
+        print(dict_words)
+        ngram_dict = {}
+        for word in dict_words:
+            if words[0] in ngram_dict:
+                ngram_dict[word[0]].append(word[1])
+            else:
+                
+                ngram_dict[word[0]] =[word[1]]
+
 
     return ngram_dict
 a5 = "I am an NLPer"
-dictionary =ngram(a5,2)
-print("05: "+str(dictionary))
-
+dictionary_c = ngram(a5,2,"c")
+dictionary_w = ngram(a5,2,"w")
+print(u"05: 文字bi-gram\n"+str(dictionary_c))
+print(u"05: 単語bi-gram\n"+str(dictionary_w))
 
     
