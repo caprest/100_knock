@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy
-
+import random
 """
 http://www.cl.ecei.tohoku.ac.jp/nlp100/
 1st chap
@@ -71,4 +71,41 @@ dictionary_w = ngram(a5,2,"w")
 print(u"05: 文字bi-gram\n"+str(dictionary_c))
 print(u"05: 単語bi-gram\n"+str(dictionary_w))
 
-    
+
+#06
+a6_1 = "paraparaparadise"
+a6_2 = "paragraph"
+dic1=ngram(a6_1,2,"c")
+dic2=ngram(a6_2,2,"c")
+x = dic1.keys()
+y =dic2.keys()
+X = set(x)
+Y = set(y)
+
+print("X&Y="+str(list(X&Y)))
+print("X+Y="+str(list(X|Y)))
+print("X-Y="+str(list(X-Y)))
+true_string =u"含まれる。"
+false_string =u"含まれない。"
+tf1 = true_string if "se" in X else false_string
+tf2 = true_string if "se" in Y else false_string
+print(u"seというbi-gramはXに"+tf1+u"そしてYに"+tf2)
+
+
+#07
+def xyz_string(x,y,z):
+    return str(x)+u"時の"+str(y)+u"は"+str(z)
+print(xyz_string(12,u"気温",22.4))
+
+#08
+def cipher(text):
+    cipherlist = [chr(219-ord(char)) if char.islower() else char for char in text]
+    ciphertext = "".join(cipherlist)
+    return ciphertext
+text = "Make America Great Britain Again"
+print(text+"を暗号化すると"+cipher(text)+"になり"+"復号化すると"+cipher(cipher(text))+"になる")
+#09
+
+
+
+
