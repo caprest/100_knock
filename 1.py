@@ -81,7 +81,7 @@ x = dic1.keys()
 y =dic2.keys()
 X = set(x)
 Y = set(y)
-
+print("06:")
 print("X&Y="+str(list(X&Y)))
 print("X+Y="+str(list(X|Y)))
 print("X-Y="+str(list(X-Y)))
@@ -95,7 +95,7 @@ print(u"seというbi-gramはXに"+tf1+u"そしてYに"+tf2)
 #07
 def xyz_string(x,y,z):
     return str(x)+u"時の"+str(y)+u"は"+str(z)
-print(xyz_string(12,u"気温",22.4))
+print("07: "+xyz_string(12,u"気温",22.4))
 
 #08
 def cipher(text):
@@ -103,9 +103,25 @@ def cipher(text):
     ciphertext = "".join(cipherlist)
     return ciphertext
 text = "Make America Great Britain Again"
-print(text+"を暗号化すると"+cipher(text)+"になり"+"復号化すると"+cipher(cipher(text))+"になる")
-#09
+print("08: "+text+"を暗号化すると"+cipher(text)+"になり"+"復号化すると"+cipher(cipher(text))+"になる")
 
+#09
+def shuffle_string(string):
+    words=string.split(" ")
+    index = [ i for i,word in enumerate(words) if len(word)>4]
+    shuffle_index = numpy.arange(len(index))
+    random.shuffle(shuffle_index)
+    return_sentence = []
+    for i in range(len(words)):
+        if i in index:
+            ind = index.index(i)
+            pointer = index[shuffle_index[ind]]
+            return_sentence.append(words[pointer])
+        else:
+            return_sentence.append(words[i])
+    return return_sentence
+a9 = "I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind ."
+print("09: "+" ".join(shuffle_string(a9)))
 
 
 
