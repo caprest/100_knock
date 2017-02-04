@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import subprocess
 
 filename = "hightemp.txt"
 #10
@@ -42,5 +43,30 @@ data = [col1+"\t"+col2 for col1,col2 in zip(data1,data2)]
 print(data)
 os.system('paste -d"\t" col1.txt col2.txt')
 
-#14
+#14 #15
+print ("Plase input the number of output lines.")
+N = int(input())
+with open(filename,"r") as f:
+    data = f.readlines()
+print(data[0:N])
+os.system('cat hightemp.txt |head -n'+str(N) )
+print(data[-N:])
+os.system('cat hightemp.txt |tail -n'+str(N) )
 
+#16
+print("please input the number of split")
+N = int(input())
+
+os.system("LINE=`cat hightemp.txt|wc -l` ; VAR=`expr $LINE / {}` ;cat hightemp.txt|split -l $VAR".format(N))
+
+
+
+#17
+os.system('cat hightemp.txt | cut -f1 |sort|uniq')
+
+#18
+os.system('cat hightemp.txt |LANG=ja_JP.UTF-8 sort -k3')
+#19
+
+os.system(' cat hightemp.txt |cut -f1 | LANG=ja_JP.UTF-8 sort |LANG=ja_JP.UTF-8 uniq |sort -k1 -n')
+os.system('cat hightemp.txt |cut -f1 | LANG=ja_JP.UTF-8 sort |LANG=ja_JP.UTF-8 uniq -c |sort -k1 -n -r')
