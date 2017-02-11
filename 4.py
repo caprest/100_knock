@@ -88,14 +88,15 @@ noun_list = [word["base"]
                 for sent in sentence_list
                     for word in sent
                         if (word["pos1"] == "一般") & (word["pos"] == "名詞")
-            ]       
+            ]
+word_ranking = collections.Counter(word_list).most_common()
 word_ranking_10 = collections.Counter(word_list).most_common(10)
 noun_ranking_10 = collections.Counter(noun_list).most_common(10)
 print(word_ranking_10)
 print(noun_ranking_10)
 fig = plt.figure()
-ax1 = fig.add_subplot(121)
-ax2 = fig.add_subplot(122)
+ax1 = fig.add_subplot(221)
+ax2 = fig.add_subplot(222)
 def ranking_plot(ranking,ax,title):
     x = np.array([pair[1] for pair in ranking])[::-1]
     y = np.arange(10)
@@ -105,7 +106,26 @@ def ranking_plot(ranking,ax,title):
     ax.set_xlabel("頻度[回]")
     ax.set_ylabel("単語")
     ax.set_title(title)
-ranking_plot(word_ranking_10,ax1,"ベスト10")
-ranking_plot(noun_ranking_10,ax2,"ベスト10(名詞)")
+ranking_plot(word_ranking_10,ax1,"37:ベスト10")
+ranking_plot(noun_ranking_10,ax2,"37:ベスト10(名詞)")
+
+#38
+print(type(word_ranking[0][1]))
+number_word= [word[1] for word in word_ranking]
+ax3 = fig.add_subplot(223)
+ax3.hist(number_word, bins=10, normed=True)
+ax3.set_title('38:ヒストグラム')
+ax3.set_xlabel('word')
+ax3.set_ylabel('freq')
+ax3.set_yscale("log")
+ax3.set_ylim(0,0.1)
+#39
+ax4 = fig.add_subplot(224)
+ax4.scatter(np.arange(len(number_word))+1,number_word)
+ax4.set_xlabel("順位")
+ax4.set_title("39:Zipfの法則")
+ax4.set_xscale("log")
+ax4.set_yscale("log")
+#fig.subplots_adjust(hspace = 0.5)
 plt.tight_layout()
 plt.show()
